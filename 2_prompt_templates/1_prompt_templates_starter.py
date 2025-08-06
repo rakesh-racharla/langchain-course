@@ -1,10 +1,13 @@
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
 
-llm = ChatOpenAI(model="gpt-4")
+# llm = ChatOpenAI(model="gpt-4")
+
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
 
 # template = "Write a {tone} email to {company} expressing interest in the {position} position, mentioning {skill} as a key strength. Keep it to 4 lines max"
 
@@ -24,7 +27,7 @@ messages = [
 ]
 
 prompt_template = ChatPromptTemplate.from_messages(messages)
-prompt = prompt_template.invoke({"topic": "lawyers", "joke_count": 3})
+prompt = prompt_template.invoke({"topic": "lawyers", "joke_count": 1})
 result = llm.invoke(prompt)
-print(result)
+print(result.content)
 
